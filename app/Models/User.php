@@ -18,9 +18,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
         'password',
+        'phone',
+        'bio',
+        'profession',
+        'photo',
+        'verify'
     ];
 
     /**
@@ -42,4 +48,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'user_id');
+    }
+
+    public function otp()
+    {
+        return $this->hasMany(Otp::class, 'user_id');
+    }
+
+    public function folders()
+    {
+        return $this->hasMany(Folder::class, 'user_id');
+    }
 }
