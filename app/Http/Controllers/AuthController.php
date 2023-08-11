@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Otp;
+use App\Models\User;
+use App\Traits\VerifyEmailAccount;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    use VerifyEmailAccount;
     // USER LOGIN FUNCTIONS
 
     function login()
@@ -41,9 +45,27 @@ class AuthController extends Controller
     }
 
     // check the email if exist and alert
-    function forgetPasswordStore()
+    function forgetPasswordStore(Request $request)
     {
-        return redirect()->route('reset.password');
+        $form = $request->validate([
+            'email' => ['required', 'string', 'email']
+        ]);
+
+        $email = $request->input('email');
+        $emailExist = User::where('email', $email)->first();
+
+        if ($emailExist) {
+
+            // generate the OTP and send it to user mail
+            $this->forgetPasswordOtp($emailExist);
+            $request->session()->put('email', $email);
+
+            return to_route('reset.password')->with('message', 'Otp send to the email addres');
+        }
+
+        return to_route('forget.password')->withErrors(['email' => 'The email is not found']);
+
+        //return redirect()->route('reset.password');
     }
 
     // change the user password
@@ -52,9 +74,32 @@ class AuthController extends Controller
         return view('auth.reset-password');
     }
 
-    function resetPasswordStore()
+    function resetPasswordStore(Request $request)
     {
-        return redirect()->route('reset.confirm');
+        $form = $request->validate([
+            'otp' => ['required', 'numeric', 'min_digits:6'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password_confirmation' => 'required|min:6'
+        ]);
+
+
+        $code = $request->input('otp');
+        $password = $request->input('password');
+
+        $user = User::where('email', session('email'))->first();
+
+
+
+        $otp = Otp::where('otp_code', $code)
+            ->where('user_id', $user->id)
+            ->first();
+
+        if ($otp) {
+            $user->update(['password' => $password]);
+            return redirect()->route('reset.confirm')->with('message', 'Password reset successful');
+        }
+
+        return redirect()->route('reset.password')->withErrors(['otp' => 'The OTP is invalid']);;
     }
 
     function resetConfirm()

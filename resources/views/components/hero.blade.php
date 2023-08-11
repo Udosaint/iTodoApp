@@ -31,7 +31,7 @@
         </div>
         <!-- Image -->
         <div class="md:w-1/2">
-          <img src="img/illustration-intro.svg" alt="" />
+          <img src="img/illustration-intro-01.png" alt="" />
         </div>
       </div>
     </section>

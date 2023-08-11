@@ -78,12 +78,12 @@
       <div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
         <a class="flex items-center gap-4" href="#" @click.prevent="dropdownOpen = ! dropdownOpen">
           <span class="hidden text-right lg:block">
-            <span class="block text-sm font-medium text-black dark:text-white">Thomas Anree</span>
-            <span class="block text-xs font-medium">UX Designer</span>
+            <span class="block text-sm font-medium text-black dark:text-white">{{auth()->user()->firstname}} {{auth()->user()->lastname}}</span>
+            <span class="block text-xs font-medium">{{auth()->user()->profession}}</span>
           </span>
 
           <span class="h-12 w-12 rounded-full">
-            <img src="img/avatar-ali.png" alt="User" />
+            <img src="{{auth()->user()->photo? asset('storage/'.auth()->user()->photo) : asset('img/avatar-ali.png')}}" alt="User" />
           </span>
 
           <svg :class="dropdownOpen && 'rotate-180'" class="hidden fill-current sm:block" width="12" height="8"
@@ -113,11 +113,17 @@
               </a>
             </li>
           </ul>
-          <button
-            class="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-brightRed lg:text-base">
-            <i class="fas fa-right-from-bracket text-xl duration-300 ease-in-out"></i>
-            Log Out
-          </button>
+          <form action="{{route('user.logout')}}" method="POST">
+            @csrf
+            <button
+              class="group relative w-full flex items-center gap-2.5 rounded-sm py-2 px-8 font-medium
+               text-darkBlue  duration-300 ease-in-out hover:bg-brightRedLight hover:text-whiten"
+            >
+              <i class=" fas fa-right-from-bracket"></i>
+
+              Logout
+            </button>
+            </form>
         </div>
         <!-- Dropdown End -->
 

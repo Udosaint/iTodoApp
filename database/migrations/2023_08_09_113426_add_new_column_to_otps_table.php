@@ -11,9 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('folder_icons', function (Blueprint $table) {
-            $table->id();
-            $table->string('icon');
+        Schema::table('otps', function (Blueprint $table) {
             $table->timestamps();
         });
     }
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('folder_icons');
+        Schema::table('otps', function (Blueprint $table) {
+            $table->timestamp('created')->useCurrent();
+        });
     }
 };

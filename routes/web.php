@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+//Route::get('test', function () {
+//    return view('email.accountverifyotp');
+//});
+
 
 
 

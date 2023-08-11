@@ -10,6 +10,7 @@ class ItodoController extends Controller
 
     public function dashboard()
     {
+
         return view('user.dashboard');
     }
 
@@ -28,11 +29,25 @@ class ItodoController extends Controller
         return view('user.dashboard');
     }
 
+    public function editTask()
+    {
+        return view('user.addtask');
+    }
+
     public function today()
     {
         return view('user.today');
     }
 
+    public function folder()
+    {
+        return view('user.folder');
+    }
+
+    public function folders()
+    {
+        return view('user.new-folder');
+    }
 
     public function createfolder()
     {

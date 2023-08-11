@@ -14,19 +14,20 @@ class Task extends Model
         'description',
         'status',
         'user_id',
-        'forlder_id',
+        'folder_id',
         'task_date',
         'reminder'
     ];
 
 
+
     public function user()
     {
-        $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function folders()
     {
-        $this->belongsTo(Folder::class, 'folder_id');
+        return $this->belongsTo(Folder::class, 'folder_id');
     }
 }

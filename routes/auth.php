@@ -8,6 +8,9 @@ use App\Http\Livewire\Auth\Login;
 Route::middleware('guest')->group(function () {
 
     // using livewire component to render some of the component
+    // The pages are being loaded by blade component but any of the part of the page 
+    // where any action is being perform is loaded by livewire
+
     Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
     Route::post('/auth/login', [AuthController::class, 'authenticate'])->name('login');
 

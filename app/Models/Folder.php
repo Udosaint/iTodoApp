@@ -12,7 +12,7 @@ class Folder extends Model
     protected $fillable = [
         'name',
         'user_id',
-        'folder_icon_id',
+        'icon',
     ];
 
 
@@ -24,12 +24,5 @@ class Folder extends Model
     public function tasks()
     {
         $this->hasMany(Task::class, 'folder_id');
-    }
-
-
-    // for the folder icons
-    public function icons()
-    {
-        $this->belongsTo(Folder_icon::class, 'folder_icon_id');
     }
 }

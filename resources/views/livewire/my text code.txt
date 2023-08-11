@@ -1,0 +1,35 @@
+
+
+
+@unless (count($icons) == 0) 
+    <div>
+        <label class="mb-2 block font-medium text-sm text-black dark:text-white">
+        Select Icon
+        </label>
+
+        <div class="grid grid-cols-5 gap-4 md:grid-cols-5 md:gap-2 xl:grid-cols-7 2xl:gap-7 ">
+        @foreach ($icons as $icon)
+            <div class="border border-stroke p-3 bg-white shadow-3 rounded">
+                <label class="flex items-center justify-between">
+                <input wire:model="icon" type="radio"  class="form-radio"   name="icon" value="{{$icon->icon_name}}">
+                <span class="ml-2">{!!$icon->icon_name!!}</span>
+                </label>
+            </div>                                          
+        @endforeach
+            
+        </div> 
+            @error('icon')
+                <p class=" text-red-500 p-1">{{$message}}</p>
+            @enderror
+    </div> 
+
+@else
+    <div class="w-full border-stroke bg-white text-center">
+        <p class=" text-green-500 p-1">There is no Icons yet, contact the admin</p>
+    </div>
+@endunless
+
+
+
+
+

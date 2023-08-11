@@ -22,7 +22,10 @@
                     <div class="mb-6 mt-4 my-3">
                         <label class="block  text-veryDarkBlue text-md  mb-5" for="username">Your Email</label>
                         <input class="w-full border border-veryDarkBlue rounded-md px-3 py-2 focus:outline-none focus:border-2 focus:border-brightRed"
-                            type="text" id="email" placeholder="Enter your email" />
+                            type="email" name="email" id="email" placeholder="Enter your email" />
+                             @error('email')
+                                <p class=" text-red-500 p-1">{{$message}}</p>
+                            @enderror
                     </div>
 
                     <button class="w-full h-11  bg-brightRed hover:bg-brightRedLight transition text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
