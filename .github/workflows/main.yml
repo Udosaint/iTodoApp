@@ -14,3 +14,4 @@ jobs:
         server: ftp.udosaint.com.ng
         username: udosaint_itodo@itodo.udosaint.com.ng
         password: Udosaint@2023
+        server-dir: /itodo/
