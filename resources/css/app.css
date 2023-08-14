@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+#cta {
+    background-image: url('../../public/img/bg-simplify-section-desktop.svg');
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 576px) {
+    body {
+        background-position: 50px -50px;
+        background-size: 500px;
+    }
+
+    #cta {
+        background-image: url('../../public/img/bg-simplify-section-mobile.svg');
+    }
+}
+
+/* Hamburger Menu */
+.hamburger {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    transition: all 0.25s;
+    position: relative;
+}
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: #000;
+    transform: rotate(0);
+    transition: all 0.5s;
+}
+
+.hamburger-middle {
+    transform: translateY(7px);
+}
+
+.hamburger-bottom {
+    transform: translateY(14px);
+}
+
+.open {
+    transform: rotate(90deg);
+    transform: translateY(0px);
+}
+
+.open .hamburger-top {
+    transform: rotate(45deg) translateY(6px) translate(6px);
+}
+
+.open .hamburger-middle {
+    display: none;
+}
+
+.open .hamburger-bottom {
+    transform: rotate(-45deg) translateY(6px) translate(-6px);
+}
+
+
+
+/* For The Admin Dashboard */
+@layer base {
+    body {
+        @apply relative z-1 bg-whiten text-base font-normal;
+    }
+}
+
+@layer components {}
+
+@layer utilities {
+
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .chat-height {
+        @apply h-[calc(100vh_-_8.125rem)] lg: h-[calc(100vh_-_5.625rem)];
+    }
+
+    .inbox-height {
+        @apply h-[calc(100vh_-_8.125rem)] lg: h-[calc(100vh_-_5.625rem)];
+    }
+}
+
+/* third-party libraries CSS */
+
+.tableCheckbox:checked~div span {
+    @apply opacity-100;
+}
+
+.tableCheckbox:checked~div {
+    @apply border-primary bg-primary;
+}
+
+.taskCheckbox:checked~.box span {
+    @apply opacity-100;
+}
+
+.taskCheckbox:checked~p {
+    @apply line-through;
+}
+
+
+
+.custom-input-date::-webkit-calendar-picker-indicator {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+.custom-input-date-1::-webkit-calendar-picker-indicator {
+    background-image: url(../images/icon/icon-calendar.svg);
+}
+
+.custom-input-date-2::-webkit-calendar-picker-indicator {
+    background-image: url(../images/icon/icon-arrow-down.svg);
+}
+
+[x-cloak] {
+    display: none !important;
+}
